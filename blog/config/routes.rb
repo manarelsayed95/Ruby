@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get 'welcome/index'
   #///////////////////////////////////////////////////////////////////////////////////////////////
 
   #welcome controllers
@@ -15,11 +16,6 @@ Rails.application.routes.draw do
   resources :articles do
   resources :comments
   end
-
-  #signup form 
-  # match ':controller(/:action(/:id))(.:format)'
-  resources :users
-  resources :sessions
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
