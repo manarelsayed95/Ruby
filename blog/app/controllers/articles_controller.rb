@@ -1,7 +1,10 @@
 class ArticlesController < ApplicationController
 
+    before_action :authenticate_user!
+    load_and_authorize_resource param_method: :article_params
+
     #authentication handling
-    http_basic_authenticate_with name: "admin", password: "admin", except: [:index, :show]
+    # http_basic_authenticate_with name: "admin", password: "admin", except: [:index, :show]
     
     #new method
     def new
@@ -38,6 +41,7 @@ class ArticlesController < ApplicationController
     def update
         @article = Article.find(params[:id])
        
+
         if @article.update(article_params)
           redirect_to @article
         else
@@ -54,8 +58,11 @@ class ArticlesController < ApplicationController
     end
        
     private
-    def article_params
-        params.require(:article).permit(:title, :text)
-    end
+    # def article_params
+    #     params.require(:article).permit(:title, :text)
+    # end
 
+    def article_params
+        params.require(:article).permit(:title, :text,:user_id).merge(user_id: current_user.id)
+    end 
 end

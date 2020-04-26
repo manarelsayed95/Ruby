@@ -9,8 +9,10 @@
 </p>
 
 <p>
+<% if can? :destroy, comment %>
   <%= link_to 'Destroy Comment', [comment.article, comment],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
+<%end%>
 </p>
 
